@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Admin"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-25 07:18:41 PM"/>
+        <attribute name="created" value="QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTAyLTI0OzAyOjQ3OjI0IFBNOzI3MDM="/>
+        <attribute name="edited" value="QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTAyLTI2OzAxOjUyOjQ0IFBNOzQ7QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTAyLTI0OzAyOjQ3OjI0IFBNO0lCIENTIFNMIEhvbWV3b3JrIHdpdGggRnVuY3Rpb25zIDI3LjAyLjIwMjMuZnByZzs5NDg2"/>
+        <attribute name="edited" value="QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTEwLTI1OzA3OjE4OjQxIFBNOzIzOzI4NjU="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="gradeInput" type="Integer" array="False" size=""/>
+            <declare name="nameInput" type="String" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="numberOfStudents" type="Integer" array="False" size=""/>
+            <declare name="numberOfBestStudentsToOutput" type="Integer" array="False" size=""/>
+            <declare name="modeGrade" type="Integer" array="False" size=""/>
+            <declare name="numCarry" type="Integer" array="False" size=""/>
+            <declare name="stringCarry" type="String" array="False" size=""/>
+            <declare name="mode" type="Integer" array="False" size=""/>
+            <declare name="modeCount" type="Integer" array="False" size=""/>
+            <declare name="currValue" type="Integer" array="False" size=""/>
+            <declare name="currCount" type="Integer" array="False" size=""/>
+            <declare name="average" type="Integer" array="False" size=""/>
+            <declare name="studentsAboveAverage" type="Integer" array="False" size=""/>
+            <assign variable="average" expression="0"/>
+            <assign variable="studentsAboveAverage" expression="0"/>
+            <assign variable="mode" expression="0"/>
+            <assign variable="modeCount" expression="0"/>
+            <assign variable="currValue" expression="0"/>
+            <assign variable="currCount" expression="0"/>
+            <assign variable="i" expression="0"/>
+            <input variable="numberOfStudents"/>
+            <declare name="grades" type="Integer" array="True" size="numberOfStudents"/>
+            <declare name="names" type="String" array="True" size="numberOfStudents"/>
+            <for variable="i" start="0" end="numberOfStudents - 1" direction="inc" step="1">
+                <input variable="nameInput"/>
+                <assign variable="names[i]" expression="nameInput"/>
+                <input variable="gradeInput"/>
+                <assign variable="grades[i]" expression="gradeInput"/>
+            </for>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="numberOfStudents - 2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="numberOfStudents - 1" direction="inc" step="1">
+                    <if expression="grades[i] &lt; grades[j]">
+                        <then>
+                            <assign variable="numCarry" expression="grades[i]"/>
+                            <assign variable="grades[i]" expression="grades[j]"/>
+                            <assign variable="grades[j]" expression="numCarry"/>
+                            <assign variable="stringCarry" expression="names[i]"/>
+                            <assign variable="names[i]" expression="names[j]"/>
+                            <assign variable="names[j]" expression="stringCarry"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <input variable="numberOfBestStudentsToOutput"/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="numberOfBestStudentsToOutput-1" direction="inc" step="1">
+                <assign variable="j" expression="i+1"/>
+                <output expression="&quot;The number &quot; &amp; j &amp; &quot; best student is &quot; &amp; names[i] &amp; &quot; with a score of &quot; &amp; grades[i]" newline="True"/>
+            </for>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="numberOfStudents - 1" direction="inc" step="1">
+                <if expression="grades[i] = currValue">
+                    <then>
+                        <assign variable="currCount" expression="currCount + 1"/>
+                    </then>
+                    <else>
+                        <if expression="currCount &gt; modeCount">
+                            <then>
+                                <assign variable="modeCount" expression="currCount"/>
+                                <assign variable="mode" expression="currValue"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <assign variable="currValue" expression="grades[i]"/>
+                        <assign variable="currCount" expression="1"/>
+                    </else>
+                </if>
+            </for>
+            <if expression="currCount &gt; modeCount">
+                <then>
+                    <assign variable="mode" expression="currValue"/>
+                    <assign variable="modeCount" expression="currCount"/>
+                </then>
+                <else/>
+            </if>
+            <output expression="&quot;The Modal class is &quot; &amp; mode &amp; &quot; with a frequency of &quot; &amp; modeCount" newline="True"/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="numberOfStudents - 1" direction="inc" step="1">
+                <assign variable="average" expression="average + grades[i]"/>
+            </for>
+            <assign variable="average" expression="average / numberOfStudents"/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="numberOfStudents - 1" direction="inc" step="1">
+                <if expression="grades[i] &gt; average">
+                    <then>
+                        <assign variable="studentsAboveAverage" expression="studentsAboveAverage + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;There are &quot; &amp; studentsAboveAverage &amp; &quot; students above average.&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

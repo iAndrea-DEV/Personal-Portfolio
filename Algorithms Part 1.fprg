@@ -1,0 +1,909 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Admin"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-25 07:18:25 PM"/>
+        <attribute name="created" value="QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTAzLTEzOzEwOjI5OjE1IFBNOzI3MDE="/>
+        <attribute name="edited" value="QWRtaW47QU5EUkVBLUxBUFRPUDsyMDIzLTEwLTI1OzA3OjE4OjI1IFBNOzY1OzI4NzM="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <call expression="SortAndFrequency"/>
+        </body>
+    </function>
+    <function name="Average" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="listLength" type="Integer" array="False" size=""/>
+            <declare name="avg" type="Real" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="avg" expression="0"/>
+            <output expression="&quot;How many numbers would you like to find the average of? &quot;" newline="True"/>
+            <input variable="listLength"/>
+            <for variable="i" start="0" end="listLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="avg" expression="avg + num"/>
+            </for>
+            <assign variable="avg" expression="avg / listLength"/>
+            <output expression="&quot;The average of these numbers is: &quot; &amp; avg" newline="True"/>
+        </body>
+    </function>
+    <function name="CommonElementsNoDuplication" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="array1Length" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter length of first array: &quot;" newline="True"/>
+            <input variable="array1Length"/>
+            <declare name="array2Length" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter length of second array: &quot;" newline="True"/>
+            <input variable="array2Length"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="k" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="array1" type="Integer" array="True" size="array1Length"/>
+            <declare name="array2" type="Integer" array="True" size="array2Length"/>
+            <declare name="commonArray" type="Integer" array="True" size="array1Length"/>
+            <declare name="commonLength" type="Integer" array="False" size=""/>
+            <assign variable="commonLength" expression="0"/>
+            <declare name="isInCommonArray" type="Boolean" array="False" size=""/>
+            <for variable="i" start="0" end="array1Length - 1" direction="inc" step="1">
+                <output expression="&quot;Enter element in first array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array1[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="array2Length - 1" direction="inc" step="1">
+                <output expression="&quot;Enter element in second array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array2[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="array1Length - 1" direction="inc" step="1">
+                <assign variable="isInCommonArray" expression="false"/>
+                <for variable="j" start="0" end="array2Length - 1" direction="inc" step="1">
+                    <if expression="array1[i] = array2[j]">
+                        <then>
+                            <for variable="k" start="0" end="commonLength - 1" direction="inc" step="1">
+                                <if expression="array2[j] = commonArray[k]">
+                                    <then>
+                                        <assign variable="isInCommonArray" expression="true"/>
+                                    </then>
+                                    <else/>
+                                </if>
+                            </for>
+                            <if expression="isInCommonArray = false">
+                                <then>
+                                    <assign variable="commonArray[commonLength]" expression="array1[i]"/>
+                                    <assign variable="commonLength" expression="commonLength +1"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <for variable="i" start="0" end="commonLength -1" direction="inc" step="1">
+                <output expression="commonArray[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="Duplicates" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="k" type="Integer" array="False" size=""/>
+            <output expression="&quot;How many numbers would you like to add?&quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="duplicates" type="Integer" array="True" size="arrayLength"/>
+            <declare name="numberOfDuplicates" type="Integer" array="False" size=""/>
+            <assign variable="numberOfDuplicates" expression="0"/>
+            <declare name="isDuplicate" type="Boolean" array="False" size=""/>
+            <assign variable="isDuplicate" expression="false"/>
+            <for variable="i" start="0" end="arrayLength -1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="arrayLength-2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="arrayLength-1" direction="inc" step="1">
+                    <assign variable="isDuplicate" expression="false"/>
+                    <if expression="array[j] = array[i]">
+                        <then>
+                            <if expression="numberOfDuplicates = 0">
+                                <then>
+                                    <assign variable="duplicates[numberOfDuplicates]" expression="array[j]"/>
+                                    <assign variable="numberOfDuplicates" expression="numberOfDuplicates + 1"/>
+                                </then>
+                                <else>
+                                    <for variable="k" start="0" end="numberOfDuplicates-1" direction="inc" step="1">
+                                        <if expression="duplicates[k] = array[j]">
+                                            <then>
+                                                <assign variable="isDuplicate" expression="true"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </for>
+                                    <if expression="isDuplicate = false">
+                                        <then>
+                                            <assign variable="duplicates[numberOfDuplicates]" expression="array[j]"/>
+                                            <assign variable="numberOfDuplicates" expression="numberOfDuplicates + 1"/>
+                                        </then>
+                                        <else/>
+                                    </if>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <for variable="i" start="0" end="numberOfDuplicates-1" direction="inc" step="1">
+                <output expression="duplicates[i] &amp; &quot; is a duplicate number.&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="EvenOrOdd" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;Please enter your number: &quot;" newline="True"/>
+            <input variable="num"/>
+            <if expression="num % 2 = 0">
+                <then>
+                    <output expression="&quot;Number is even.&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Number is odd.&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Factorial" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter your number: &quot;" newline="True"/>
+            <input variable="num"/>
+            <for variable="i" start="num-1" end="1" direction="dec" step="1">
+                <comment text="for loop can also be increasing, starting from 1 and ending to num - 1. Same procedure applies"/>
+                <assign variable="num" expression="num * i"/>
+            </for>
+            <output expression="&quot;Your number factorial is: &quot; &amp; num" newline="True"/>
+        </body>
+    </function>
+    <function name="IdenticalSums" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="targetSum" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter array length: &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="numPairs" type="Integer" array="False" size=""/>
+            <assign variable="numPairs" expression="0"/>
+            <declare name="uniqueNumbers" type="Integer" array="False" size=""/>
+            <assign variable="uniqueNumbers" expression="0"/>
+            <declare name="isUnique" type="Boolean" array="False" size=""/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number in array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <declare name="uniqueArray" type="Integer" array="True" size="arrayLength"/>
+            <output expression="&quot;Enter target sum: &quot;" newline="True"/>
+            <input variable="targetSum"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <assign variable="isUnique" expression="true"/>
+                <if expression="uniqueNumbers = 0">
+                    <then>
+                        <assign variable="uniqueArray[0]" expression="array[i]"/>
+                        <assign variable="uniqueNumbers" expression="uniqueNumbers + 1"/>
+                    </then>
+                    <else>
+                        <for variable="j" start="0" end="uniqueNumbers - 1" direction="inc" step="1">
+                            <if expression="array[i] = uniqueArray[j]">
+                                <then>
+                                    <if expression="array[i] + array[j] = targetSum">
+                                        <then>
+                                            <comment text="Count for the case when the desired sum is even and there are two numbers equal to the desiredSum/2"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="isUnique" expression="false"/>
+                                        </else>
+                                    </if>
+                                </then>
+                                <else/>
+                            </if>
+                        </for>
+                        <if expression="isUnique = true">
+                            <then>
+                                <assign variable="uniqueArray[uniqueNumbers]" expression="array[i]"/>
+                                <assign variable="uniqueNumbers" expression="uniqueNumbers + 1"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </else>
+                </if>
+            </for>
+            <comment text="CONNECTOR B"/>
+            <for variable="i" start="0" end="uniqueNumbers - 2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="uniqueNumbers-1" direction="inc" step="1">
+                    <if expression="uniqueArray[i] + uniqueArray[j] = targetSum">
+                        <then>
+                            <assign variable="numPairs" expression="numPairs + 1"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <output expression="&quot;There are &quot; &amp; numPairs &amp; &quot; unique number pairs whose sum is your desired number.&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="IntersectionOfLists" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="array1Length" type="Integer" array="False" size=""/>
+            <declare name="array2Length" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;What is the length of the first list? &quot;" newline="True"/>
+            <input variable="array1Length"/>
+            <output expression="&quot;What is the length of the second list? &quot;" newline="True"/>
+            <input variable="array2Length"/>
+            <declare name="array1" type="Integer" array="True" size="array1Length"/>
+            <declare name="array2" type="Integer" array="True" size="array2Length"/>
+            <for variable="i" start="0" end="array1Length-1" direction="inc" step="1">
+                <output expression="&quot;Enter a number in the first list: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array1[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="array2Length-1" direction="inc" step="1">
+                <output expression="&quot;Enter a number in the second list: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array2[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="array1Length -1" direction="inc" step="1">
+                <comment text="The intersection algorithm does not count for duplicates. If a number appears twice in any of the arrays, it will be outputed twice."/>
+                <for variable="j" start="0" end="array2Length -1" direction="inc" step="1">
+                    <if expression="array2[j] = array1[i]">
+                        <then>
+                            <output expression="array1[i]" newline="True"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="LargestNumberInList" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="listLength" type="Integer" array="False" size=""/>
+            <declare name="maxNumber" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter the length of your list: &quot;" newline="True"/>
+            <input variable="listLength"/>
+            <for variable="i" start="0" end="listLength-1" direction="inc" step="1">
+                <output expression="&quot;Enter your number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <if expression="i = 0">
+                    <then>
+                        <assign variable="maxNumber" expression="num"/>
+                    </then>
+                    <else>
+                        <if expression="num &gt; maxNumber">
+                            <then>
+                                <assign variable="maxNumber" expression="num"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </else>
+                </if>
+            </for>
+            <output expression="&quot;Largest number in list is: &quot; &amp; maxNumber" newline="True"/>
+        </body>
+    </function>
+    <function name="ModeOfArray" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="mode" type="Integer" array="False" size=""/>
+            <declare name="modeCount" type="Integer" array="False" size=""/>
+            <declare name="cache" type="Integer" array="False" size=""/>
+            <declare name="cacheCount" type="Integer" array="False" size=""/>
+            <assign variable="modeCount" expression="0"/>
+            <assign variable="cacheCount" expression="0"/>
+            <output expression="&quot;Enter length of array: &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="arrayLength - 2" direction="inc" step="1">
+                <assign variable="cache" expression="array[i]"/>
+                <assign variable="cacheCount" expression="1"/>
+                <for variable="j" start="i+1" end="arrayLength - 1" direction="inc" step="1">
+                    <if expression="array[j] = cache">
+                        <then>
+                            <assign variable="cacheCount" expression="cacheCount + 1"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+                <if expression="cacheCount &gt; modeCount">
+                    <then>
+                        <assign variable="mode" expression="cache"/>
+                        <assign variable="modeCount" expression="cacheCount"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Mode of array is &quot; &amp; mode &amp; &quot; with a frequency of &quot; &amp; modeCount &amp; &quot; times.&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="NumberDivisibleByNumber" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num1" type="Integer" array="False" size=""/>
+            <declare name="num2" type="Integer" array="False" size=""/>
+            <output expression="&quot;Please enter number 1: &quot;" newline="True"/>
+            <input variable="num1"/>
+            <output expression="&quot;Please enter number 2: &quot;" newline="True"/>
+            <input variable="num2"/>
+            <if expression="num1 % num2 = 0">
+                <then>
+                    <output expression="&quot;The first number is divisible by the second number.&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;The first number is not divisible by the second number.&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="NumberOfSortingSteps" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="numberOfStepsIncreasing" type="Integer" array="False" size=""/>
+            <declare name="numberOfStepsDecreasing" type="Integer" array="False" size=""/>
+            <assign variable="numberOfStepsIncreasing" expression="0"/>
+            <assign variable="numberOfStepsDecreasing" expression="0"/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="carry" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;What is the length of your array? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="arrayDuplicate" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength -1" direction="inc" step="1">
+                <output expression="&quot;Enter number in array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+                <assign variable="arrayDuplicate[i]" expression="num"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <comment text="Sort Increasing"/>
+            <for variable="i" start="0" end="arrayLength-2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="arrayLength-1" direction="inc" step="1">
+                    <if expression="array[i] &gt; array[j]">
+                        <then>
+                            <assign variable="carry" expression="array[j]"/>
+                            <assign variable="array[j]" expression="array[i]"/>
+                            <assign variable="array[i]" expression="carry"/>
+                            <assign variable="numberOfStepsIncreasing" expression="numberOfStepsIncreasing + 1"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <comment text="Sort Decreasing"/>
+            <for variable="i" start="0" end="arrayLength-2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="arrayLength-1" direction="inc" step="1">
+                    <if expression="arrayDuplicate[i] &lt; arrayDuplicate[j]">
+                        <then>
+                            <assign variable="carry" expression="array[i]"/>
+                            <assign variable="array[i]" expression="array[j]"/>
+                            <assign variable="array[j]" expression="carry"/>
+                            <assign variable="numberOfStepsDecreasing" expression="numberOfStepsDecreasing + 1"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <output expression="&quot;You need &quot; &amp; numberOfStepsIncreasing &amp; &quot; steps to sort this array in an increasing order.&quot;" newline="True"/>
+            <output expression="&quot;You need &quot; &amp; numberOfStepsDecreasing &amp; &quot; steps to sort this array in an decreasing order.&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="OddAndPrime" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="isPrime" type="Boolean" array="False" size=""/>
+            <output expression="&quot;Enter length of array: &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="nPrimes" type="Integer" array="False" size=""/>
+            <assign variable="nPrimes" expression="0"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number in array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <declare name="oddPrimeArray" type="Integer" array="True" size="arrayLength"/>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <assign variable="isPrime" expression="true"/>
+                <if expression="array[i] &gt; 2">
+                    <then>
+                        <for variable="j" start="2" end="array[i] - 1" direction="inc" step="1">
+                            <comment text="It can be shown that is suffices to compare the number in array[i] with j from to up to sqrt(array[i]). &#13;&#10;This is because if a number d divides n, then n/d must also divide n. &#13;&#10;Using proof by contradiction, it can be shown that &#13;&#10;one of these numbers must be less than sqrt(n). &#13;&#10;This can reduce the number of comparisons by half."/>
+                            <if expression="array[i] % j = 0">
+                                <then>
+                                    <assign variable="isPrime" expression="false"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </for>
+                    </then>
+                    <else>
+                        <comment text="Even though an element can be 2 and it is prime, it is an even prime which we do not want in the array. Therefore boolean is assigned to false"/>
+                        <assign variable="isPrime" expression="false"/>
+                    </else>
+                </if>
+                <if expression="isPrime = true">
+                    <then>
+                        <assign variable="oddPrimeArray[nPrimes]" expression="array[i]"/>
+                        <assign variable="nPrimes" expression="nPrimes + 1"/>
+                        <comment text="Prime numbers were identified."/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <comment text="CONNECTOR B"/>
+            <declare name="cache" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="nPrimes - 2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="nPrimes - 1" direction="inc" step="1">
+                    <if expression="oddPrimeArray[i] &gt; oddPrimeArray[j]">
+                        <then>
+                            <assign variable="cache" expression="oddPrimeArray[i]"/>
+                            <assign variable="oddPrimeArray[i]" expression="oddPrimeArray[j]"/>
+                            <assign variable="oddPrimeArray[j]" expression="cache"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <for variable="i" start="0" end="nPrimes - 1" direction="inc" step="1">
+                <output expression="oddPrimeArray[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="PositiveOrNegative" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;Please enter your number: &quot;" newline="True"/>
+            <input variable="num"/>
+            <if expression="num &gt; 0">
+                <then>
+                    <output expression="&quot;Number is positive.&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="num = 0">
+                        <then>
+                            <output expression="&quot;Number is neither positive nor negative.&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;Number is negative.&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="PrimesBelow" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="isPrime" type="Boolean" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <output expression="&quot;What is your number? &quot;" newline="True"/>
+            <input variable="num"/>
+            <if expression="num = 1">
+                <then>
+                    <output expression="&quot;There are no primes below and including your number.&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="num = 2">
+                        <then>
+                            <output expression="&quot;A prime number below and including your number is 2.&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <for variable="i" start="2" end="num" direction="inc" step="1">
+                                <assign variable="isPrime" expression="true"/>
+                                <comment text="We are including the number itself in the list if it is a prime. We start from 2 because 1 is by convention not a prime."/>
+                                <for variable="j" start="2" end="i-1" direction="inc" step="1">
+                                    <if expression="i % j = 0">
+                                        <then>
+                                            <assign variable="isPrime" expression="false"/>
+                                        </then>
+                                        <else/>
+                                    </if>
+                                </for>
+                                <if expression="isPrime = true">
+                                    <then>
+                                        <output expression="&quot;A prime number below and including your number is: &quot; &amp; i" newline="True"/>
+                                    </then>
+                                    <else/>
+                                </if>
+                            </for>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="ReadArrayInReverse" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;How many numbers are in your array? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <output expression="array[arrayLength-1-i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="ReverseSentence" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="sentence" type="String" array="False" size=""/>
+            <declare name="reverseSentence" type="String" array="False" size=""/>
+            <assign variable="reverseSentence" expression="&quot;&quot;"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter your sentence: &quot;" newline="True"/>
+            <input variable="sentence"/>
+            <declare name="sentenceCharLength" type="Integer" array="False" size=""/>
+            <assign variable="sentenceCharLength" expression="Len(sentence)"/>
+            <declare name="charArray" type="String" array="True" size="sentenceCharLength"/>
+            <for variable="i" start="0" end="sentenceCharLength -1" direction="inc" step="1">
+                <assign variable="charArray[i]" expression="Char(sentence,i)"/>
+            </for>
+            <for variable="i" start="0" end="sentenceCharLength -1" direction="inc" step="1">
+                <assign variable="reverseSentence" expression="reverseSentence &amp; charArray[sentenceCharLength-1-i]"/>
+            </for>
+            <comment text="Using the Char(String,int) function the full reverse can be done immediately. The array inbetween is used for clarity."/>
+            <output expression="reverseSentence" newline="True"/>
+        </body>
+    </function>
+    <function name="SecondSmallest" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="listLength" type="Integer" array="False" size=""/>
+            <declare name="min1" type="Integer" array="False" size=""/>
+            <declare name="min2" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <input variable="listLength"/>
+            <for variable="i" start="0" end="listLength-1" direction="inc" step="1">
+                <output expression="&quot;Enter your number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <if expression="i = 0">
+                    <then>
+                        <assign variable="min1" expression="num"/>
+                    </then>
+                    <else>
+                        <if expression="i = 1">
+                            <then>
+                                <assign variable="min2" expression="num"/>
+                            </then>
+                            <else>
+                                <if expression="num &gt; min1 &amp;&amp; num &lt; min2">
+                                    <then>
+                                        <assign variable="min2" expression="num"/>
+                                    </then>
+                                    <else>
+                                        <if expression="num &lt; min1">
+                                            <then>
+                                                <assign variable="min2" expression="min1"/>
+                                                <assign variable="min1" expression="num"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+            </for>
+            <output expression="&quot;Second smallest number is: &quot; &amp; min2" newline="True"/>
+        </body>
+    </function>
+    <function name="SortAndFrequency" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter length of array: &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="numberCache" type="Integer" array="False" size=""/>
+            <declare name="frequencyCache" type="Integer" array="False" size=""/>
+            <declare name="uniqueNumbers" type="Integer" array="False" size=""/>
+            <assign variable="uniqueNumbers" expression="0"/>
+            <declare name="uniqueNumbersArray" type="Integer" array="True" size="arrayLength"/>
+            <declare name="frequencyArray" type="Integer" array="True" size="arrayLength"/>
+            <declare name="uniqueNumber" type="Boolean" array="False" size=""/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+                <assign variable="frequencyArray[i]" expression="0"/>
+            </for>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <assign variable="uniqueNumber" expression="true"/>
+                <if expression="uniqueNumbers = 0">
+                    <then>
+                        <assign variable="uniqueNumbersArray[0]" expression="array[i]"/>
+                        <assign variable="frequencyArray[0]" expression="frequencyArray[0] + 1"/>
+                        <assign variable="uniqueNumbers" expression="uniqueNumbers + 1"/>
+                    </then>
+                    <else>
+                        <for variable="j" start="0" end="uniqueNumbers - 1" direction="inc" step="1">
+                            <if expression="array[i] = uniqueNumbersArray[j]">
+                                <then>
+                                    <assign variable="frequencyArray[j]" expression="frequencyArray[j] + 1"/>
+                                    <assign variable="uniqueNumber" expression="false"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </for>
+                        <if expression="uniqueNumber = true">
+                            <then>
+                                <assign variable="uniqueNumbersArray[uniqueNumbers]" expression="array[i]"/>
+                                <assign variable="frequencyArray[uniqueNumbers]" expression="frequencyArray[uniqueNumbers]+ 1"/>
+                                <assign variable="uniqueNumbers" expression="uniqueNumbers + 1"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </else>
+                </if>
+            </for>
+            <comment text="CONNECTOR B"/>
+            <for variable="i" start="0" end="uniqueNumbers-2" direction="inc" step="1">
+                <for variable="j" start="i+1" end="uniqueNumbers - 1" direction="inc" step="1">
+                    <if expression="frequencyArray[i] &lt; frequencyArray[j]">
+                        <then>
+                            <assign variable="frequencyCache" expression="frequencyArray[i]"/>
+                            <assign variable="frequencyArray[i]" expression="frequencyArray[j]"/>
+                            <assign variable="frequencyArray[j]" expression="frequencyCache"/>
+                            <assign variable="numberCache" expression="uniqueNumbersArray[i]"/>
+                            <assign variable="uniqueNumbersArray[i]" expression="uniqueNumbersArray[j]"/>
+                            <assign variable="uniqueNumbersArray[j]" expression="numberCache"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+            <for variable="i" start="0" end="uniqueNumbers - 1" direction="inc" step="1">
+                <output expression="&quot;Number &quot; &amp; uniqueNumbersArray[i] &amp; &quot; appears &quot; &amp; frequencyArray[i] &amp; &quot; times.&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="Squares" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;How many numbers would you like to add? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <output expression="&quot;Enter your number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <assign variable="sum" expression="sum + array[i]*array[i]"/>
+            </for>
+            <output expression="&quot;The sum of the squares of your numbers is: &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+    <function name="Subsequence" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="subLength" type="Integer" array="False" size=""/>
+            <declare name="cacheLength" type="Integer" array="False" size=""/>
+            <assign variable="cacheLength" expression="0"/>
+            <assign variable="subLength" expression="0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="k" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;What is the length of your array? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <declare name="subArray" type="Integer" array="True" size="arrayLength"/>
+            <declare name="cacheArray" type="Integer" array="True" size="arrayLength"/>
+            <declare name="continueSearch" type="Boolean" array="False" size=""/>
+            <comment text="CONNECTOR A"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <comment text="Inputting the Array"/>
+                <output expression="&quot;Enter number in your array: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="arrayLength - 2" direction="inc" step="1">
+                <assign variable="continueSearch" expression="true"/>
+                <assign variable="cacheArray[0]" expression="array[i]"/>
+                <assign variable="cacheLength" expression="1"/>
+                <for variable="j" start="i+1" end="arrayLength - 1" direction="inc" step="1">
+                    <if expression="continueSearch = true">
+                        <then>
+                            <if expression="array[j] &gt; array[j-1]">
+                                <then>
+                                    <assign variable="cacheArray[cacheLength]" expression="array[j]"/>
+                                    <assign variable="cacheLength" expression="cacheLength +1"/>
+                                </then>
+                                <else>
+                                    <assign variable="continueSearch" expression="false"/>
+                                    <assign variable="cacheArray[cacheLength]" expression="array[j]"/>
+                                    <assign variable="cacheLength" expression="cacheLength +1"/>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+                <comment text="CONNECTOR B"/>
+                <if expression="cacheLength &gt; subLength">
+                    <then>
+                        <assign variable="subLength" expression="cacheLength"/>
+                        <for variable="k" start="0" end="cacheLength-1" direction="inc" step="1">
+                            <assign variable="subArray[k]" expression="cacheArray[k]"/>
+                            <assign variable="cacheArray[k]" expression="0"/>
+                        </for>
+                    </then>
+                    <else/>
+                </if>
+                <assign variable="cacheLength" expression="0"/>
+            </for>
+            <for variable="i" start="0" end="subLength - 1" direction="inc" step="1">
+                <output expression="subArray[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="SumOfLists" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <output expression="&quot;How many numbers are in each of your lists? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array1" type="Integer" array="True" size="arrayLength"/>
+            <declare name="array2" type="Integer" array="True" size="arrayLength"/>
+            <declare name="sumArray" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <output expression="&quot;Add number to first list: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array1[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <output expression="&quot;Add number to second list: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array2[i]" expression="num"/>
+            </for>
+            <for variable="i" start="0" end="arrayLength-1" direction="inc" step="1">
+                <assign variable="sumArray[i]" expression="array1[i] + array2[i]"/>
+                <output expression="sumArray[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="SumOfTwoNumbers" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="num1" type="Integer" array="False" size=""/>
+            <declare name="num2" type="Integer" array="False" size=""/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <input variable="num1"/>
+            <input variable="num2"/>
+            <assign variable="sum" expression="num1+num2"/>
+            <output expression="sum" newline="True"/>
+        </body>
+    </function>
+    <function name="SymmetricArray" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="arrayLength" type="Integer" array="False" size=""/>
+            <declare name="num" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="isSymmetric" type="Boolean" array="False" size=""/>
+            <assign variable="isSymmetric" expression="true"/>
+            <output expression="&quot;What is the length of your array? &quot;" newline="True"/>
+            <input variable="arrayLength"/>
+            <declare name="array" type="Integer" array="True" size="arrayLength"/>
+            <for variable="i" start="0" end="arrayLength - 1" direction="inc" step="1">
+                <output expression="&quot;Enter number: &quot;" newline="True"/>
+                <input variable="num"/>
+                <assign variable="array[i]" expression="num"/>
+            </for>
+            <if expression="arrayLength % 2 = 0">
+                <then>
+                    <for variable="i" start="0" end="arrayLength/2 -1" direction="inc" step="1">
+                        <if expression="array[i] != array[arrayLength-1-i]">
+                            <then>
+                                <assign variable="isSymmetric" expression="false"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                </then>
+                <else>
+                    <for variable="i" start="0" end="(arrayLength -1) /2" direction="inc" step="1">
+                        <if expression="array[i] != array[arrayLength-1-i]">
+                            <then>
+                                <assign variable="isSymmetric" expression="false"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                </else>
+            </if>
+            <if expression="isSymmetric = true">
+                <then>
+                    <output expression="&quot;Array is symmetric.&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Array is not symmetric.&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
