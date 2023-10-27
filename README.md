@@ -16,7 +16,7 @@
 <h2> Description</h2>
 <p>
 <br>
-This repository contains all of my personal projects and developments related to/in computer science. The only exception is the link to the Personal Project animation. The projects/developments span a time of 3 years and have been written in a variety of programming (C#, Python, JavaScript & Java) and markup languages (HTML & CSS). Two commits are algorithm problem sets developed diagrammatically as flowcharts.
+This repository contains all of my personal projects and developments related to/in computer science. The only exception is the YouTube video link to the unedited Personal Project animation. The projects/developments span a time of 3 years and have been written in a variety of programming (C#, Python, JavaScript & Java) and markup languages (HTML & CSS). Two commits are algorithm problem sets developed diagrammatically as flowcharts.
 </p>
 
 <p>
